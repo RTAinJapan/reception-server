@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+  register:
+    tty: true
+    build:
+      context: .
+      dockerfile: ./register/Dockerfile
+    ports:
+      - '13000:3000'
+    init: true
+    environment:
+      - TOKEN=
+      - DB_ENDPOINT=http://db:3000
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
+    networks:
+      - app_internal
+      - app_external
+    restart: always
+
+  appdata:
+    tty: true
+    build:
+      context: .
+      dockerfile: ./appdata/Dockerfile
+    ports:
+      - '13001:3000'
+    init: true
+    environment:
+      - TOKEN=
+      - DB_ENDPOINT=http://db:3000
+    networks:
+      - app_internal
+      - app_external
+    restart: always
+
+  db:
+    image: postgrest/postgrest
+    # 外からアクセスしたい場合
+    # ports:
+    #  - "9000:3000"
+    environment:
+      PGRST_DB_URI: postgres://postgres:postgres@reception-db.xxxxxxxx.ap-northeast-1.rds.amazonaws.com:5432/receptiondb
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: postgres
+    networks:
+      - app_internal
+      - app_external #外のDBと繋ぐ時
+
+networks:
+  app_external:
+  app_internal:
+    internal: true
