@@ -21,3 +21,13 @@ CREATE table badgeholder (
   code text not null,
   PRIMARY KEY (id)
 );
+
+/** 受付済みユーザー */
+CREATE table accepted (
+  id BIGSERIAL NOT NULL,
+  name varchar(64) not null,
+  category varchar(64) not null,
+  code varchar(64) not null,
+  timestamp timestamp default CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
