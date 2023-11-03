@@ -13,13 +13,13 @@ const get = async (req: Express.Request, res: Express.Response, next: Express.Ne
     if(token && token !== reqtoken) {
       throw new Error("invalid token");
     }
-    const portRes = await axios.get(`${dbEndpoint}/accepted`);
-    console.log(portRes.data);
+    const getRes = await axios.get(`${dbEndpoint}/accepted`);
+    console.log(getRes.data);
 
     // response
     return res.status(200).send({
       status: "ok",
-      data: portRes.data
+      data: getRes.data
     });
   
   } catch(e) {
@@ -41,14 +41,18 @@ const post = async (req: Express.Request, res: Express.Response, next: Express.N
       throw new Error("invalid token");
     }
 
+    // データ登録
     const data = req.body;
-    const portRes = await axios.post(`${dbEndpoint}/accepted`, data);
-    console.log(portRes.data);
+    const postRes = await axios.post(`${dbEndpoint}/accepted`, data);
+    console.log(postRes.data);
+
+    // 現在の全データを取得
+    const getRes = await axios.get(`${dbEndpoint}/accepted`);
 
     // response
     return res.status(201).send({
       status: "ok",
-      data: portRes.data
+      data: getRes.data
     });
   
   } catch(e) {
