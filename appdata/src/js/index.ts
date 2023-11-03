@@ -1,11 +1,13 @@
 import express from 'express';
 import expressListEndpoints from 'express-list-endpoints';
+import cors from 'cors';
 import visitor from './routes/visitor';
 import badgeholder from './routes/badgeholder';
 import accepted from './routes/accepted';
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use('/visitor', visitor);
 app.use('/badgeholder', badgeholder);
