@@ -23,6 +23,7 @@ const get = async (req: Express.Request, res: Express.Response, next: Express.Ne
     });
   
   } catch(e) {
+    console.warn(e.message);
     return res.status(500).send({
       status: "ng",
       data: e.message
