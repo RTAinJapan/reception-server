@@ -1,4 +1,4 @@
-name: Publish Docker image to ghcr.io
+name: appdata Publish Docker image to ghcr.io
 
 # release時に実行
 on:
