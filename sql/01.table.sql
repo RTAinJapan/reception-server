@@ -1,5 +1,5 @@
 /** 観客データ */
-CREATE table visitor (
+CREATE table receptiondb.visitor (
   id BIGSERIAL NOT NULL,
   name varchar(255) not null,
   category text not null,
@@ -11,7 +11,7 @@ CREATE table visitor (
 );
 
 /** 名札持ち */
-CREATE table badgeholder (
+CREATE table receptiondb.badgeholder (
   id BIGSERIAL NOT NULL,
   name varchar(255) not null,
   category text not null,
@@ -23,7 +23,7 @@ CREATE table badgeholder (
 );
 
 /** 受付済みユーザー */
-CREATE table accepted (
+CREATE table receptiondb.accepted (
   id BIGSERIAL NOT NULL,
   name varchar(64) not null,
   category varchar(64) not null,
